@@ -107,4 +107,5 @@ class SingleProduct extends StatelessWidget {
     );
   }
 
+
 }

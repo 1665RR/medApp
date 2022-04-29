@@ -23,14 +23,6 @@ class _ProductDetailsState extends State<ProductDetails> {
         title: (
             const Text('Mediclix')
         ),
-        actions: <Widget>[
-          IconButton(
-              onPressed: (){},
-              icon: const Icon(Icons.search)),
-          IconButton(
-              onPressed: (){},
-              icon: const Icon(Icons.shopping_cart)),
-        ],
       ),
       body: ListView(
         children: <Widget>[

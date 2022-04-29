@@ -46,9 +46,6 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: <Widget>[
           IconButton(
-              onPressed: (){},
-              icon: const Icon(Icons.search)),
-          IconButton(
               onPressed: (){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=> Cart()));
               },
@@ -109,7 +106,7 @@ class _HomePageState extends State<HomePage> {
             padding:  EdgeInsets.all(20.0),
             child: Text('Categories'),
           ),
-          HorizontalList(),
+          Category(),
 
           //padding widget
            Padding(

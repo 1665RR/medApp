@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   carousel_pro: ^1.0.0
+  http: 0.13.4
   flutter:
     sdk: flutter
 

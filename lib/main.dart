@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:med_app/components/products.dart';
+import 'package:med_app/pages/cart.dart';
+import 'package:med_app/components/horizontal_listview.dart';
 
 void main() {
   runApp( const MaterialApp(
@@ -25,10 +27,9 @@ class _HomePageState extends State<HomePage> {
       child: Carousel(
         boxFit: BoxFit.cover,
         images: const [
-          AssetImage('images/melany-tuinfosalud-com-Y8WJyAmakms-unsplash.jpg'),
-          AssetImage('images/melany-tuinfosalud-com-Y8WJyAmakms-unsplash.jpg'),
-          AssetImage('images/melany-tuinfosalud-com-Y8WJyAmakms-unsplash.jpg'),
-          AssetImage('images/melany-tuinfosalud-com-Y8WJyAmakms-unsplash.jpg'),
+          NetworkImage('https://images.unsplash.com/photo-1618120508902-c8d05e7985ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80'),
+          NetworkImage('https://images.unsplash.com/photo-1543363363-6dbd3125fb6d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80'),
+          NetworkImage('https://images.unsplash.com/photo-1587291085754-df33cc8b6edd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=665&q=80'),
       ],
         autoplay: false,
         animationCurve: Curves.fastLinearToSlowEaseIn,
@@ -48,7 +49,9 @@ class _HomePageState extends State<HomePage> {
               onPressed: (){},
               icon: const Icon(Icons.search)),
           IconButton(
-              onPressed: (){},
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> Cart()));
+              },
               icon: const Icon(Icons.shopping_cart)),
         ],
       ),
@@ -86,9 +89,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> Cart()));
+              },
               child: const ListTile(
-               title: Text('My Orders'),
+               title: Text('Shopping cart'),
                 leading: Icon(Icons.shopping_basket),
               ),
             ),
@@ -102,7 +107,17 @@ class _HomePageState extends State<HomePage> {
           //padding widget
           const Padding(
             padding:  EdgeInsets.all(20.0),
-            child: Text('Recent products'),
+            child: Text('Categories'),
+          ),
+          HorizontalList(),
+
+          //padding widget
+           Padding(
+            padding:  EdgeInsets.all(20.0),
+            child:Container(
+              alignment: Alignment.centerLeft,
+              child: Text('Recent products'),
+            ),
           ),
 
           //grif view

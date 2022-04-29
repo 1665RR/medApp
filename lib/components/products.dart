@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:med_app/pages/product_details.dart';
 
 class Products extends StatefulWidget {
   const Products({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class _ProductsState extends State<Products> {
   var product_list = [
     {
       "_id": "625fb386ab188f6db9a5121d",
-      "picture": "http://placehold.it/32x32",
+      "picture": "https://images.unsplash.com/photo-1550572017-4fcdbb59cc32?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1039&q=80",
       "company": "INVENTURE",
       "price": 85,
       "email": "olsenvincent@inventure.com",
@@ -21,7 +22,7 @@ class _ProductsState extends State<Products> {
     },
     {
       "_id": "625fb3860ec4cc5ca4e8683d",
-      "picture": "http://placehold.it/32x32",
+      "picture": "https://images.unsplash.com/photo-1618120508902-c8d05e7985ee?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
       "company": "BICOL",
       "price": 825,
       "email": "olsenvincent@bicol.com",
@@ -31,7 +32,7 @@ class _ProductsState extends State<Products> {
     },
     {
       "_id": "625fb38629114bc0615e94aa",
-      "picture": "http://placehold.it/32x32",
+      "picture": "https://images.unsplash.com/photo-1599451897608-ad6eb8676edf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "company": "FLUM",
       "price": 25,
       "email": "olsenvincent@flum.com",
@@ -41,7 +42,7 @@ class _ProductsState extends State<Products> {
     },
     {
       "_id": "625fb386e40a790b70bc4c79",
-      "picture": "http://placehold.it/32x32",
+      "picture": "https://images.unsplash.com/photo-1633171031508-a8f26271e8aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80",
       "company": "SCENTY",
       "price": 100,
       "email": "olsenvincent@scenty.com",
@@ -51,7 +52,7 @@ class _ProductsState extends State<Products> {
     },
     {
       "_id": "625fb3861f5a5f8d3dfb02cf",
-      "picture": "http://placehold.it/32x32",
+      "picture": "https://images.unsplash.com/photo-1614859385191-6021780bd35f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "company": "NETILITY",
       "price": 35,
       "email": "olsenvincent@netility.com",
@@ -61,7 +62,7 @@ class _ProductsState extends State<Products> {
     },
     {
       "_id": "625fb386cbefb41f5cd45342",
-      "picture": "http://placehold.it/32x32",
+      "picture": "https://images.unsplash.com/photo-1599451897608-ad6eb8676edf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       "company": "ENTHAZE",
       "price": 40,
       "email": "olsenvincent@enthaze.com",
@@ -78,10 +79,12 @@ class _ProductsState extends State<Products> {
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index){
-          return SingleProduct(
-            productName: product_list[index]['name'],
-            productPicture: product_list[index]['picture'],
-            productPrice: product_list[index]['price'],
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: SingleProduct(
+              productName: product_list[index]['company'],
+              productPicture: product_list[index]['picture'],
+              productPrice: product_list[index]['price'],),
           );
         }
   );
@@ -102,10 +105,43 @@ class SingleProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('test'),
+    return Card(
+      child: Hero(
+        tag: productName,
+        child: Material(
+          child: InkWell(
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) =>
+                    ProductDetails(
+                      product_detail_name: productName,
+                      product_detail_picture: productPicture,
+                      product_detail_price: productPrice,
+                    ),
+              ),
+            ),
+            child: GridTile(
+              footer: Container(
+                color: Colors.white70,
+                child: ListTile(
+                  leading: Text(
+                    productName,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  title: Text(
+                    "\€$productPrice",
+                    style: const TextStyle(
+                      color: Colors.black45,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ),
+              child: Image.network(productPicture, fit: BoxFit.cover),
+            ),
+          ),
+        ),
+      ),
     );
   }
-
-
 }
